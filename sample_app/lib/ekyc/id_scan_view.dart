@@ -7,10 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:sample_app/id_information.dart';
+import 'package:sample_app/home/id_information.dart';
 
-class ParsedResultScreen extends StatefulWidget {
-  const ParsedResultScreen({
+class IDScanView extends StatefulWidget {
+  const IDScanView({
     super.key,
     required this.image,
   });
@@ -18,15 +18,15 @@ class ParsedResultScreen extends StatefulWidget {
   final String image;
 
   @override
-  State<ParsedResultScreen> createState() => _ParsedResultScreenState();
+  State<IDScanView> createState() => _IDScanViewState();
 }
 
-class _ParsedResultScreenState extends State<ParsedResultScreen> {
+class _IDScanViewState extends State<IDScanView> {
   Map<String, dynamic>? result;
 
   AsyncValue<IDInformation> card = const AsyncValue.loading();
 
-  final baseUrl = 'https://975f-2405-4803-fbbf-3d0-a8b0-7360-e537-91a5.ap.ngrok.io';
+  final baseUrl = 'https://dc20-2405-4803-fbbf-3d0-4988-4f7b-6cc9-a6df.ap.ngrok.io';
 
   Future<void> fetchData() async {
     final uri = Uri.parse('$baseUrl/predict/image');
