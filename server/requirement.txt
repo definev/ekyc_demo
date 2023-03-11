@@ -6,7 +6,7 @@ PyYAML
 uvicorn
 fastapi
 opencv-python
-numpy
+numpy==1.21.6
 starlette
 google
 tensorflow==2.11.0
