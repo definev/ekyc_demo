@@ -7,10 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:sample_app/home/id_information.dart';
+import 'package:sample_app/home/domain/id_information.dart';
 
-class IDScanView extends StatefulWidget {
-  const IDScanView({
+class IDResultView extends StatefulWidget {
+  const IDResultView({
     super.key,
     required this.image,
   });
@@ -18,10 +18,10 @@ class IDScanView extends StatefulWidget {
   final String image;
 
   @override
-  State<IDScanView> createState() => _IDScanViewState();
+  State<IDResultView> createState() => _IDResultViewState();
 }
 
-class _IDScanViewState extends State<IDScanView> {
+class _IDResultViewState extends State<IDResultView> {
   Map<String, dynamic>? result;
 
   AsyncValue<IDInformation> card = const AsyncValue.loading();

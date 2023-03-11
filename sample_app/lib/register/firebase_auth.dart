@@ -9,9 +9,14 @@ class AuthService {
     return credential.user;
   }
 
-  Future<User?> signUp(String email, String password) async {
+  Future<User?> signUp(String email, String password, String fullName) async {
     final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
-    return credential.user;
+    final user = credential.user;
+    if (user != null) {
+      await user.updateDisplayName(fullName);
+      return user;
+    }
+    return null;
   }
 
   Future<void> signOut() async {

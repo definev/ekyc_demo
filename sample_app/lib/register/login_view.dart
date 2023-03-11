@@ -2,7 +2,7 @@ import 'package:flextras/flextras.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:sample_app/home/face_recognition_view.dart';
+import 'package:sample_app/home/views/home_view.dart';
 import 'package:sample_app/register/firebase_auth.dart';
 import 'package:sample_app/register/signup_view.dart';
 
@@ -55,9 +55,10 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             .signIn(emailTextController.text, passwordTextController.text);
 
                         if (user != null) {
+                          navigator.popUntil((route) => route.isFirst);
                           navigator.push(
                             MaterialPageRoute(
-                              builder: (context) => const FaceRecognitionView(),
+                              builder: (context) => const HomeView(),
                             ),
                           );
                         }

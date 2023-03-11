@@ -4,18 +4,17 @@ import 'dart:ui';
 import 'package:camerawesome/camerawesome_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:gap/gap.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sample_app/ekyc/id_scan_view.dart';
 
-class FaceRecognitionView extends StatefulWidget {
-  const FaceRecognitionView({super.key});
+class IDScanView extends StatefulWidget {
+  const IDScanView({super.key});
 
   @override
-  State<FaceRecognitionView> createState() => _FaceRecognitionViewState();
+  State<IDScanView> createState() => _IDScanViewState();
 }
 
-class _FaceRecognitionViewState extends State<FaceRecognitionView> with SingleTickerProviderStateMixin {
+class _IDScanViewState extends State<IDScanView> with SingleTickerProviderStateMixin {
   late AnimationController controller;
 
   @override
@@ -44,7 +43,6 @@ class _FaceRecognitionViewState extends State<FaceRecognitionView> with SingleTi
   Widget build(BuildContext context) {
     return CameraAwesomeBuilder.custom(
       saveConfig: SaveConfig.photo(pathBuilder: _pathBuilder),
-      sensor: Sensors.front,
       builder: (state, previewSize, previewRect) => Stack(
         children: [
           Center(
@@ -61,12 +59,12 @@ class _FaceRecognitionViewState extends State<FaceRecognitionView> with SingleTi
                         padding: const EdgeInsets.all(30),
                         child: Center(
                             child: AspectRatio(
-                          aspectRatio: 1,
+                          aspectRatio: 85.6 / 53.98,
                           child: DecoratedBox(
                             decoration: BoxDecoration(
                               backgroundBlendMode: BlendMode.clear,
                               color: Colors.white.withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(1000),
+                              borderRadius: BorderRadius.circular(15),
                               border: BoxBorder.lerp(
                                 Border.all(color: const Color.fromARGB(255, 255, 255, 255), width: 1),
                                 Border.all(color: const Color.fromARGB(255, 255, 255, 255), width: 4),
@@ -84,9 +82,8 @@ class _FaceRecognitionViewState extends State<FaceRecognitionView> with SingleTi
                       color: Colors.white54,
                     ),
                     padding: const EdgeInsets.all(12),
-                    child: Text('Chụp khuôn mặt của bạn', style: Theme.of(context).textTheme.bodyMedium),
+                    child: Text('Đưa CMT/CCCD vào khung để chụp ảnh', style: Theme.of(context).textTheme.bodyMedium),
                   ),
-                  const Gap(50),
                 ],
               ),
             ),
@@ -118,7 +115,7 @@ class _FaceRecognitionViewState extends State<FaceRecognitionView> with SingleTi
                             final image = await photoState.takePhoto();
                             navigator.push(
                               MaterialPageRoute(
-                                builder: (_) => IDScanView(image: image),
+                                builder: (_) => IDResultView(image: image),
                               ),
                             );
                           },
