@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "597141945937",
+    "project_id": "ekyc-demo-5656f",
+    "storage_bucket": "ekyc-demo-5656f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597141945937:android:7a24e939343bff3c5b0270",
+        "android_client_info": {
+          "package_name": "com.example.sample_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597141945937-bd9qk0l592o328rstnnvgcmje7der25a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwIgEqMf8Tvq5tn6hf8k5_5p-WTlOWjGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597141945937-bd9qk0l592o328rstnnvgcmje7der25a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
