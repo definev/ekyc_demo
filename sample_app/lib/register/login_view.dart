@@ -56,7 +56,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
 
                         if (user != null) {
                           navigator.popUntil((route) => route.isFirst);
-                          navigator.push(
+                          navigator.pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => const HomeView(),
                             ),

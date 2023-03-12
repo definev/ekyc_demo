@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sample_app/ekyc/id_scan_view.dart';
+import 'package:sample_app/ekyc/id_result_view.dart';
 
 class FaceRecognitionView extends StatefulWidget {
   const FaceRecognitionView({super.key});
