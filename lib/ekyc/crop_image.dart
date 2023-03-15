@@ -44,6 +44,7 @@ class _CropImageScreenState extends State<CropImageScreen> {
                   area: area,
                   scale: scale,
                 );
+                
                 navigator.push(
                   MaterialPageRoute(
                     builder: (context) => IDResultView(image: cropped),

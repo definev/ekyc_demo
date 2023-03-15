@@ -30,12 +30,15 @@ class _IDResultViewState extends ConsumerState<IDResultView> {
 
   AsyncValue<IDInformation> card = const AsyncValue.loading();
 
-  final baseUrl = 'https://a5b5-2405-4802-1c95-68b0-81eb-2eb6-7d9b-1390.ap.ngrok.io';
+  final baseUrl =
+      'https://0053-2405-4802-1c89-98f0-bc71-4b41-71cc-1cf4.ap.ngrok.io';
 
   Future<void> fetchData() async {
-    final uri = Uri.parse('$baseUrl/predict/image');
+    final uri = Uri.parse('$baseUrl/uploader');
+
     var request = http.MultipartRequest("POST", uri);
-    request.headers.addAll({'Accept': 'application/json', 'Content-Type': 'multipart/form-data'});
+    request.headers.addAll(
+        {'Accept': 'application/json', 'Content-Type': 'multipart/form-data'});
     request.files.add(
       http.MultipartFile.fromBytes(
         'file',
@@ -52,7 +55,8 @@ class _IDResultViewState extends ConsumerState<IDResultView> {
       return;
     }
     response.stream.transform(utf8.decoder).listen((value) async {
-      final idInformation = IDInformation.fromJson(jsonDecode(value));
+      final data = jsonDecode(jsonDecode(value)["res"]);
+      final idInformation = IDInformation.fromJson(data);
       card = AsyncValue.data(idInformation);
       setState(() {});
     });
@@ -73,16 +77,13 @@ class _IDResultViewState extends ConsumerState<IDResultView> {
       ),
       body: Column(
         children: [
-          AspectRatio(
-            aspectRatio: 85.6 / 53.98,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.file(
-                  widget.image,
-                  fit: BoxFit.cover,
-                ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.file(
+                widget.image,
+                fit: BoxFit.cover,
               ),
             ),
           ),
