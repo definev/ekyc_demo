@@ -22,13 +22,29 @@ final currentUserIdInformationProvider = FutureProvider.autoDispose<IDInformatio
   },
 );
 
-class VerifiedHomeView extends StatelessWidget {
+class VerifiedHomeView extends StatefulWidget {
   const VerifiedHomeView({
     super.key,
     required this.idInformation,
   });
 
   final IDInformation idInformation;
+
+  @override
+  State<VerifiedHomeView> createState() => _VerifiedHomeViewState();
+}
+
+class _VerifiedHomeViewState extends State<VerifiedHomeView> {
+  late IDInformation initial = widget.idInformation;
+  late IDInformation idInformation = widget.idInformation;
+
+  @override
+  void didUpdateWidget(covariant VerifiedHomeView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.idInformation != widget.idInformation) {
+      idInformation = widget.idInformation;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,24 +59,59 @@ class VerifiedHomeView extends StatelessWidget {
         children: [
           ResultCard(
             title: 'Số CMT/CCCD',
-            value: idInformation.id,
+            value: widget.idInformation.id,
+            onChanged: (value) {
+              idInformation = idInformation.copyWith(id: value);
+              setState(() {});
+            },
           ),
           ResultCard(
             title: 'Họ và tên',
-            value: idInformation.name,
+            value: widget.idInformation.name,
+            onChanged: (value) {
+              idInformation = idInformation.copyWith(name: value);
+              setState(() {});
+            },
           ),
           ResultCard(
             title: 'Ngày sinh',
-            value: idInformation.birth,
+            value: widget.idInformation.birth,
+            onChanged: (value) {
+              idInformation = idInformation.copyWith(birth: value);
+              setState(() {});
+            },
           ),
           ResultCard(
             title: 'Quê quán',
-            value: idInformation.add,
+            value: widget.idInformation.add,
+            onChanged: (value) {
+              idInformation = idInformation.copyWith(add: value);
+              setState(() {});
+            },
           ),
           ResultCard(
             title: 'Thường trú',
-            value: idInformation.home,
+            value: widget.idInformation.home,
+            onChanged: (value) {
+              idInformation = idInformation.copyWith(home: value);
+              setState(() {});
+            },
           ),
+          if (idInformation != initial)
+            ElevatedButton(
+              onPressed: () async {
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .update(idInformation.toJson());
+                initial = idInformation;
+                setState(() {});
+              },
+              child: const Align(
+                heightFactor: 1.0,
+                child: Text('Lưu thay đổi'),
+              ),
+            ),
           FilledButton(
             onPressed: () async {
               final navigator = Navigator.of(context);
