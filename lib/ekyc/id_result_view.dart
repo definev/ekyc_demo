@@ -102,22 +102,27 @@ class _IDResultViewState extends ConsumerState<IDResultView> {
                   ResultCard(
                     title: 'Số CMT/CCCD',
                     value: data.id,
+                    onChanged: (id) => card = AsyncData(data.copyWith(id: id)),
                   ),
                   ResultCard(
                     title: 'Họ và tên',
                     value: data.name,
+                    onChanged: (name) => card = AsyncData(data.copyWith(name: name)),
                   ),
                   ResultCard(
                     title: 'Ngày sinh',
                     value: data.birth,
+                    onChanged: (birth) => card = AsyncData(data.copyWith(birth: birth)),
                   ),
                   ResultCard(
                     title: 'Quê quán',
                     value: data.add,
+                    onChanged: (add) => card = AsyncData(data.copyWith(add: add)),
                   ),
                   ResultCard(
                     title: 'Thường trú',
                     value: data.home,
+                    onChanged: (home) => card = AsyncData(data.copyWith(home: home)),
                   ),
                   FilledButton(
                     onPressed: () async {

@@ -1,14 +1,25 @@
 import 'package:flextras/flextras.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
-class ResultCard extends StatelessWidget {
-  const ResultCard({super.key, 
+class ResultCard extends StatefulWidget {
+  const ResultCard({
+    super.key,
     required this.title,
     required this.value,
+    required this.onChanged,
   });
 
   final String title;
   final String value;
+  final ValueChanged<String> onChanged;
+
+  @override
+  State<ResultCard> createState() => _ResultCardState();
+}
+
+class _ResultCardState extends State<ResultCard> {
+  late final textController = TextEditingController(text: widget.value);
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +31,24 @@ class ResultCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            title,
+            widget.title,
             style: theme.textTheme.bodyLarge!.copyWith(
               color: theme.primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),
+          const Gap(12),
           Expanded(
-            child: Text(
-              value,
-              style: theme.textTheme.bodyLarge,
-              overflow: TextOverflow.visible,
-              textAlign: TextAlign.end,
+            child: SizedBox(
+              height: 24,
+              child: TextField(
+                controller: textController,
+                style: theme.textTheme.bodyMedium,
+                onChanged: widget.onChanged,
+                decoration: const InputDecoration.collapsed(hintText: ''),
+                maxLines: 1,
+                textAlign: TextAlign.end,
+              ),
             ),
           ),
         ],
