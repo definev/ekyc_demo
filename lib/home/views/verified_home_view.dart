@@ -9,11 +9,15 @@ import 'package:sample_app/home/domain/id_information.dart';
 import 'package:sample_app/register/firebase_auth.dart';
 import 'package:sample_app/register/login_view.dart';
 
-final currentUserIdInformationProvider = FutureProvider.autoDispose<IDInformation?>(
+final currentUserIdInformationProvider =
+    FutureProvider.autoDispose<IDInformation?>(
   (ref) async {
     final user = await ref.watch(authStateProvider.future);
     if (user == null) return null;
-    final snapshot = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+    final snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
     if (snapshot.exists) {
       return IDInformation.fromJson(snapshot.data()!);
     } else {
@@ -50,7 +54,7 @@ class _VerifiedHomeViewState extends State<VerifiedHomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Người dùng đã được xác minh'),
+        title: const Text('Đã xác minh'),
         centerTitle: true,
       ),
       body: SeparatedColumn(

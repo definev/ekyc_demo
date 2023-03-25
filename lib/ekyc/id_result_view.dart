@@ -13,6 +13,8 @@ import 'package:sample_app/ekyc/result_card.dart';
 import 'package:sample_app/home/domain/id_information.dart';
 import 'package:sample_app/home/views/verified_home_view.dart';
 
+import '../home/views/home_view.dart';
+
 class IDResultView extends ConsumerStatefulWidget {
   const IDResultView({
     super.key,
@@ -30,8 +32,7 @@ class _IDResultViewState extends ConsumerState<IDResultView> {
 
   AsyncValue<IDInformation> card = const AsyncValue.loading();
 
-  final baseUrl =
-      'https://0053-2405-4802-1c89-98f0-bc71-4b41-71cc-1cf4.ap.ngrok.io';
+  final baseUrl = ' https://b09c-118-70-133-23.ap.ngrok.io';
 
   Future<void> fetchData() async {
     final uri = Uri.parse('$baseUrl/uploader');
@@ -107,22 +108,26 @@ class _IDResultViewState extends ConsumerState<IDResultView> {
                   ResultCard(
                     title: 'Họ và tên',
                     value: data.name,
-                    onChanged: (name) => card = AsyncData(data.copyWith(name: name)),
+                    onChanged: (name) =>
+                        card = AsyncData(data.copyWith(name: name)),
                   ),
                   ResultCard(
                     title: 'Ngày sinh',
                     value: data.birth,
-                    onChanged: (birth) => card = AsyncData(data.copyWith(birth: birth)),
+                    onChanged: (birth) =>
+                        card = AsyncData(data.copyWith(birth: birth)),
                   ),
                   ResultCard(
                     title: 'Quê quán',
                     value: data.add,
-                    onChanged: (add) => card = AsyncData(data.copyWith(add: add)),
+                    onChanged: (add) =>
+                        card = AsyncData(data.copyWith(add: add)),
                   ),
                   ResultCard(
                     title: 'Thường trú',
                     value: data.home,
-                    onChanged: (home) => card = AsyncData(data.copyWith(home: home)),
+                    onChanged: (home) =>
+                        card = AsyncData(data.copyWith(home: home)),
                   ),
                   FilledButton(
                     onPressed: () async {
@@ -132,7 +137,12 @@ class _IDResultViewState extends ConsumerState<IDResultView> {
                           .doc(FirebaseAuth.instance.currentUser!.uid)
                           .set(data.toJson());
                       ref.invalidate(currentUserIdInformationProvider);
-                      navigator.pop();
+                      //navigator.pop();
+                      navigator.pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const HomeView(),
+                        ),
+                      );
                     },
                     child: const Align(
                       heightFactor: 1.0,
